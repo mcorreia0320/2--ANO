@@ -1,0 +1,87 @@
+<section>
+    <h1 class="text-success text-center fw-bold mb-4">{{receita.titulo}}</h1>
+    <div class="d-flex mb-4">
+        <div class="object-fit-cover w-50 rounded border border-success overflow-hidden position-relative">
+            <button ng-if="isLogged" ng-click="addToFavorites(receita._id)" class="px-4 py-2 btn btn-light border border-success text-success position-absolute rounded-pill fw-bold fs-3 " style="top: 3%; left:3%;">+</button>
+            <img src="{{ receita.imagem }}" class="h-75 w-100 rounded-top">
+            <h2 class="bg-light d-flex justify-content-center align-items-center h-25 text-success fw-light">Criado por {{receita.utilizador_id.username}}</h2>
+        </div>
+        <div class="w-50 px-4 d-flex flex-column justify-content-between">
+            <div>
+                <h4 class="text-success">Descrição:</h4>
+                <p class="text-success fw-light text-justify">{{receita.descricao}}</p>
+            </div>
+            <div>
+                <h4 class="text-success">Ingredientes:</h4>
+                <ul class="text-success fw-light">
+                    <li ng-repeat="ingrediente in receita.ingrediente_id">{{ingrediente.nome}}</li>
+                </ul>
+            </div>
+            <div class="d-flex justify-content-around gap-1">
+                <p class="rounded-4 bg-light p-3 text-success border border-success">{{receita.tempoPreparacao}} minutos</p>
+                <p class="rounded-4 bg-light p-3 text-success border border-success">{{receita.categoria_id.nome}}</p>
+                <p class="rounded-4 bg-light p-3 text-success border border-success">{{receita.dificuldade}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="bg-light border border bg-success p-4 rounded-4 d-flex flex-column gap-3">
+        <h4 class="text-success fw-bold text-center">Procedimento</h4>
+        <div class="flex flex-column gap-2">
+            <p class="fw-bold pe-1 text-success " ng-repeat="paso in receita.pasos">Paso {{$index + 1}}: <span class="fw-light"> {{paso.descricao}}</span> </p>
+        </div>
+    </div>
+    <h4 class="text-success fw-bold text-center mt-5">Tens duvidas? Consulta as opiniões dos utilizadores</h4>
+    <div class="all-comentarios mt-4">
+        <div class="comentario d-flex flex-column p-3 bg-success rounded-4 text-light" ng-repeat="comentario in comentarios">
+            <div class="d-flex gap-2 ">
+                <div>
+                    <img src="/images/comentario.png" alt="" width="45px" height="45px">
+                </div>
+                <div class="d-flex flex-column gap-1 pt-1">
+                    <div class="d-flex gap-2">
+                        <img ng-repeat="star in getEstrellasArray(comentario.pontuacao) track by $index" src="/images/star.png" alt="" width="10px" height="10px">
+                    </div>
+                    <p>{{comentario.utilizador_id.username}}</p>
+                </div>
+            </div>
+            <p class="fw-light comentario-desc m-0 ">"{{comentario.descricao}}"</p>
+        </div>
+    </div>
+    <h1 ng-if="comentarios.length === 0" class="bg-light border border-success p-4 text-center text-success rounded-4 mt-5">AINDA NÃO EXISTEM COMENTARIOS!</h1>
+    <div class="mt-5 d-flex gap-2" style="height: 70px;" ng-if="isLogged">
+        <h4 class="bg-light border border-success p-4 text-center text-success rounded-4 w-75 h-100">Já experimentaste esta receita? Diz a tua opinião</h4>
+        <button class="btn btn-outline-success w-25 h-100 fs-4 fw-bold rounded-4" data-bs-toggle="modal" data-bs-target="#review" type="button">Escrever Opinião</button>
+    </div>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="review">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content border border-5 border-success text-success">
+                <div class="modal-header">
+                    <h5 class="modal-title subtitle-modal fw-bolder">Escreva uma Review</h5>
+                    <button type="button" class="close btn rounded bg-success text-light border border-transparent" data-bs-dismiss="modal" arialabel="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body container">
+                    <form ng-submit="addComment(receita._id ,comentario)">
+                        <div class="form-group py-2">
+                            <label for="pontuacao" class="subtitle-moda mb-2l">Pontuação:</label>
+                            <input ng-model="comentario.pontuacao" type="number" class="form-control" min="1"  max="5" name="pontuacao" placeholder="ex: 10" required>
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="descricao" class="subtitle-moda mb-2l">Descrição:</label>
+                            <textarea ng-model="comentario.descricao" class="form-control  border-success" rows="3" placeholder="Escreva a review..." name="descricao" required></textarea>
+                        </div>
+                        <div class="d-flex justify-content-between py-2">
+                            <div>
+                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-success ms-2">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-family: Arial, Helvetica, sans-serif !important;
+    display: flex;
+    justify-content: center;
+}
+
+.bg-painel{
+    background-color: #64b7f8;
+}
+
+.bg-mobile{
+    background-color: #EBEBEB;
+}
+
+.card-color{
+    background-color: #d6d6d6;
+}
+
+.color-text{
+    color:#64b7f8;
+}
+.text-xxs{
+    font-size: 0.5rem;
+    line-height: 0.75rem;
+}
+
+.border-color {
+    border: 2px solid #64b7f8;
+}
+
+.big-checkbox {
+    appearance: none;
+    width: 20px !important; 
+    height: 20px !important; 
+    background-color: transparent;
+    cursor: pointer; 
+}
+
+.active{
+    background-color: #64b7f8;
+    color: white;
+}
+
+.activeButton {
+    scale: 1.25;
+}
+
+
+.arrow-button{
+    transition: all 0.2s ease-in-out;
+}
+
+.arrow-button:hover{
+    background-color: #64b7f8;
+}
+
+.arrow-button:hover img{
+    filter: invert(99%) sepia(1%) saturate(7500%) hue-rotate(185deg) brightness(112%) contrast(101%);
+}
+
+.filterImg{
+    filter: invert(99%) sepia(1%) saturate(7500%) hue-rotate(185deg) brightness(112%) contrast(101%);
+}
+
+.inner-border-green {
+    box-shadow: inset 10px 0px 0px 0px #30c650;
+}
+
+.inner-border-rose {
+    box-shadow: inset 10px 0px 0px 0px #ca44c1;
+}
+.inner-border-blue {
+    box-shadow: inset 10px 0px 0px 0px #7761e9;
+}
+.inner-border-red {
+    box-shadow: inset 10px 0px 0px 0px #e73535;
+}
+
+.inner-border-yellow {
+    box-shadow: inset 10px 0px 0px 0px #eaf438;
+}
+
+.input-form{
+    appearance: none;
+    background-color: transparent;
+    border: none; 
+    width: 100%;
+}
+.select-form {
+    background-color: transparent;
+    border: 2px solid #64b7f8; 
+}
+
+.input-form:focus{
+    --tw-ring-shadow: transparent;
+}
+
+.circle{
+    border-radius: 50%;
+    background: #fff;
+    height: 20px;
+    width: 20px;
+    opacity: 0;
+    animation: loading 2s ease infinite;
+}
+
+.circle:first-child{
+    animation-delay: 0s;
+}
+.circle:nth-child(2){
+    animation-delay: .3s;
+}
+.circle:nth-child(3){
+    animation-delay: .6s;
+}
+
+#reservaCompleted{
+    animation: animation2 0.6s ease both;
+}
+
+.start-animation1{
+    animation: animation1 0.8s ease 1s both;
+}
+.start-animation2{
+    animation: animation2 0.6s ease 1.5s both;
+}
+
+.filter-arrow{
+    filter: invert(100%) grayscale(100%);
+}
+
+
+
+@keyframes animation1 {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes animation2 {
+    0%{
+        opacity: 0;
+        transform-origin: center;
+        scale: 0.8;
+    }
+    50%{
+        opacity: 1;
+        transform-origin: center;
+        scale: 1.1;
+    }
+    100%{
+        opacity: 1;
+        transform-origin: center;
+        scale: 1;
+    }
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+}
+
+
+
+
+

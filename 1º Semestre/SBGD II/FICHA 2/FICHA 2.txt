@@ -1,0 +1,117 @@
+// EXERICICIO 1
+
+
+// Alunos
+
+db.alunos.insertMany([{"_id": 1,"nome": "Miguel", "data_nascimento": new Date("2003, 01, 15"), "morada": "Funchal", "email": "miguel@gmail.com", "telemovel": "935094151"},{"_id": 2,"nome": "Jackeline", "data_nascimento": new Date("2004, 10, 22"), "morada": "Monte", "email": "jackeline@gmail.com", "telemovel": "925294148"}])
+
+db.alunos.insertMany([{"_id": 3, "nome": "Saul", "data_nascimento": new Date("2001, 05, 06"), "morada": "Funchal", "email": "saul@gmail.com", "telemovel": "923745194"},{"_id": 4,"nome": "Roberto", "data_nascimento": new Date("1990, 06, 13"), "morada": "Porto da Cruz", "email": "roberto@gmail.com", "telemovel": "934920433"}])
+
+db.alunos.insertOne({"_id": 5,"nome": "Hemily", "data_nascimento": new Date("1999, 02, 10"), "morada": "Funchal", "email": "hemily@gmail.com", "telemovel": "918432955"})
+
+
+// Disciplinas
+
+db.disciplinas.insertMany([{"_id": 1,"nome": "SBGD II", "creditos": 55, "idioma": "Portugues"},{"_id": 2,"nome": "Java", "creditos": 66, "idioma": "Ingles"},{"_id": 3,"nome": "PhP", "creditos": 70, "idioma": "Portugues"},{"_id": 4,"nome": "Segurança Informatica", "creditos": 60, "idioma": "Ingles"},{"_id": 5,"nome": "Interacao Humano-Computador", "creditos": 68, "idioma": "Espanol"}])
+
+// Cursos
+
+db.curso.insertMany([{"_id": 1,"nome": "Curso 1", "departamento": "Dep. 1", "diretor": "Diretor 1","id_alunos": 3, "id_disciplinas": 2},{"_id": 2,"nome": "Curso 2", "departamento": "Dep. 2", "diretor": "Diretor 2", "id_alunos": 2, "id_disciplinas": 1},{"_id": 3,"nome": "Curso 3", "departamento": "Dep. 3", "diretor": "Diretor 3", "id_alunos": 1, "id_disciplinas": 3}, {"_id": 4,"nome": "Curso 4", "departamento": "Dep. 4", "diretor": "Diretor 4","id_alunos": 5, "id_disciplinas": 4}, {"_id": 5,"nome": "Curso 5", "departamento": "Dep. 5", "diretor": "Diretor 5", "id_alunos": 4, "id_disciplinas": 5}])
+
+
+// EXERCICIO 2
+
+1.
+
+db.alunos.find({"morada": "Funchal"}, {"nome": 1, "email": 1, "telemovel": 1, "_id": 0})
+
+2.
+
+db.alunos.aggregate([{ $lookup: { from: "curso", localField: "_id", foreignField: "id_alunos", as: "cursoDados" } }])
+
+3.
+
+db.disciplinas.aggregate([{$lookup: {from: "curso", localField: "_id", foreignField: "id_disciplinas", as: "Curso"}}])
+
+4.
+
+var aluno = db.alunos.findOne({"telemovel": "935094151"})
+var cursoAluno = db.curso.findOne({"id_alunos": aluno._id}, {"id_disciplinas": 1, "_id": 0})
+
+db.disciplinas.find({"_id": cursoAluno.id_disciplinas})
+
+5.
+
+var curso = db.curso.findOne({"_id": 3}, {"id_disciplinas": 1})
+db.disciplinas.findOne({"_id": curso.id_disciplinas})
+
+
+// EXERCICIO 3
+
+db.getCollectionInfos({name: "alunos"})
+
+db.runCommand({
+	collMod:"alunos",
+	validator: {
+		$jsonSchema: {
+			required: ["nome", "data_nascimento", "telemóvel"],
+			properties: {
+				nome: { bsonType: "string", description:"Nome obrigatório"},
+				apelido: { bsonType: "date", description:"Data_nascimento obrigatório"},
+				telemovel: { bsonType: "string", description:"Telemóvel obrigatório"}
+			}
+		}
+	}
+})
+
+db.runCommand({collMod: "curso", validator: {$jsonSchema:{bsonType: "object", required:["nome", "diretor"], properties: {nome: {bsonType: "string", description: "must be a string and is required"}, diretor:{bsonType: "string", description: "must be a string and is required"}, departamento:{bsonType: "string", description: "must be a string and is required"}}}}, validationAction: "warn"})
+
+db.getCollectionInfos({name: "alunos"})
+
+// EXERCICIO 4
+
+use humanos
+
+db.createCollection("pessoas", {
+	validator: {
+		$jsonSchema: {
+			required: ["nome", "apelido", "telemovel"],
+			properties: {
+				nome: { bsonType: "string"},
+				apelido: { bsonType: "string"},
+				telemovel: { bsonType: "string"}
+			}
+		}
+	}
+})
+
+
+OK:
+db.pessoas.insertOne({"id":1,"nome":"Luís","apelido":"Abreu","telemovel" : "922222222","email" : "la@mail.com"})
+
+ERRO:
+db.pessoas.insertOne({"id":2,"nome":"Pedro","apelido":"Santos","email" : "ps@mail.com"})
+
+
+// EXERCICIO 5 
+
+db.runCommand( {
+	collMod: "pessoas",
+	validationAction: "warn"
+}
+)
+
+Comando para experimentar se dá erro:
+db.pessoas.insertOne({"id":2,"nome":"Pedro","apelido":"Santos","email" : "ps@mail.com"})
+
+
+Se não der erro, só se vê nos logs:
+db.adminCommand( { getLog : "global" } )
+
+// EXERCICIO 6 
+
+OK:
+db.pessoas.insertOne({"id":1,"nome":"Luís","apelido":"Abreu","telemovel" : "922222222","email" : "la@mail.com"})
+
+ERRO:
+db.pessoas.insertOne({"id":2,"nome":"Pedro","apelido":"Santos","email" : "ps@mail.com"})

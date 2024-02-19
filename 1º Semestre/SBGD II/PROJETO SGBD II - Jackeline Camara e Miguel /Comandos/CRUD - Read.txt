@@ -1,0 +1,52 @@
+CRUD:
+
+
+*** Read(Find) ***
+ 
+1. Encotrar todas receitas que tenha o campo dificuldade: "Fácil" e o campo tempoPreparacao entre 10 minutos e 20 minutos. Monstra apenas o titulo, a dificuldade e o tempo de preparacao.
+
+db.receitas.find({"dificuldade": "Fácil", "tempoPreparacao": {$gte: 10, $lte: 20}}, {"_id": 0, "dificuldade": 1, "titulo": 1, "tempoPreparacao": 1})
+
+
+2. Encontrar todas as receitas que tenham pelo menos um dos seguientes ingredientes: "Sumo de Laranja", "Frango" e "Pickles".
+
+const resultado = db.ingredientes.find({"nome":{$in: ["Sumo de Laranja", "Frango", "Pickles"]}}).toArray();
+
+var ingredientes = []
+
+resultado.forEach((item) => { ingredientes.push(...item.receita_id); });
+
+db.receitas.find({"ingrediente_id": {$in: ingredientes}})
+
+3. Encontrar todos os utilizadores em que o email seja do dominio @gmail.com
+
+db.utilizadores.find({ "email": /@gmail.com$/i })
+
+4. Encontrar todos os utilizadores que tenham receitas dentro dos seus favoritos
+
+db.utilizadores.find({"favoritos": {$ne: []}})
+
+5. Encontrar todos os comentarios com 5 de pontuacao
+
+db.comentarios.find({"pontuacao": 4},{"_id": 0, "pontuacao": 1, "descricao": 1})
+
+6. Encontrar os comentarios do utilizador com o username "jacky2004"
+
+const idJackyArray = db.utilizadores.find({"username": "jacky2004"},{"_id": 1}).toArray();
+
+var idJacky = idJackyArray[0]._id;
+
+db.comentarios.find({"utilizador_id": idJacky}, {"_id": 0, "descricao": 1})
+
+7. Encontrar todas as receitas que tenham menos de 4 pasos.
+
+db.receitas.find({$expr: {$lt: [{$size: "$pasos"}, 4]}})
+
+
+
+
+
+
+
+
+

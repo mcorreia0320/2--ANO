@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRATICA TRABALHO 2</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center" style="height: 100vh;">
+    <section id="forms" class="flex flex-col gap-4">
+        <div class="h-1/4 bg-sky-500 text-white font-semibold w-[60vh] p-4 rounded-2xl flex flex-col gap-5">
+            <!-- <h1 class="text-3xl font-bold text-center">TAFERA 1</h1> -->
+            <p class="text-xl text-center">Encriptação de Email:</p>
+            <div class="flex gap-2 justify-center items-center">
+                <p>Email:</p>
+                <input type="email" name="email" id="email" class="text-black font-normal p-2" required>
+            </div>
+            <button type="button" class="px-3 py-2 bg-black text-white rounded-2xl" onclick="encryptEmailwithMD5()">Encriptação com MD5</button>
+            <button type="button" class="px-3 py-2 bg-black text-white rounded-2xl" onclick="encryptEmailwithSHA1()">Encriptação com SHA-1</button>
+            <button type="button" class="px-3 py-2 bg-black text-white rounded-2xl" onclick="encryptEmailwithSHA256()">Encriptação com SHA256</button>
+            <p id="errorEmail" class="bg-white text-black p-3 rounded-xl break-words hidden"> </p>
+            <p id="emailEncrypted" class="bg-white text-black p-3 rounded-xl h-auto break-words hidden"></p>
+        </div>
+        <div class="h-1/4 bg-sky-500 text-white font-semibold w-[60vh] p-4 rounded-2xl flex flex-col gap-3">
+            <!-- <h1 class="text-3xl font-bold">TAFERA 2</h1> -->
+            <p class="text-xl text-center">Encriptaçao e Desencriptação de Mensagens</p>
+            <div class="flex flex-col gap-2 justify-center">
+                <p>Mensagem:</p>
+                <textarea name="mensagem" id="mensagem" cols="30" rows="4" class="text-black font-normal px-2"></textarea>
+                <p>Chave de Encriptação:</p>
+                <input type="password" name="key" id="key" class="text-black font-normal p-2" required>
+            </div>
+            <button type="button" class="px-3 py-2 bg-black text-white rounded-2xl" onclick="encryptMessage()">Encriptar</button>
+            <button type="button" class="px-3 py-2 bg-black text-white rounded-2xl" onclick="decryptMessage()">Desencriptar</button>
+            <p id="errorMsg" class="bg-white text-black p-3 rounded-xl break-words hidden"></p>
+            <p id="msgEncrypted" class="bg-white text-black p-3 rounded-xl h-auto break-words hidden"></p>
+        </div>
+    </section>
+
+    <script>
+        function validateEmail() {
+           
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+
+            if (email === '') {
+                return false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (emailRegex.test(email)) {
+               return true;
+            } else {
+                return false
+            }
+        }
+
+        function encryptEmailwithMD5() {
+            const emailInput = document.getElementById('email');
+
+            if (emailInput.value === '') {
+                const errorEmail = document.getElementById('errorEmail');
+                const emailEncrypted = document.getElementById('emailEncrypted');
+                if (!emailEncrypted.classList.contains('hidden')) {
+                    emailEncrypted.classList.toggle('hidden');
+                }
+                if (errorEmail.classList.contains('hidden')) {
+                    errorEmail.classList.toggle('hidden');
+                    errorEmail.innerText = 'É necessário inserir um email';
+                } else {
+                    errorEmail.innerText = 'É necessário inserir um email';
+                }
+                
+            } else {
+                const emailValid = validateEmail();
+
+                if (emailValid) {
+                    var hash = CryptoJS.MD5(emailInput.value);
+                    var hashString = hash.toString(CryptoJS.enc.Base64);
+                    const emailEncrypted = document.getElementById('emailEncrypted');
+                    const errorEmail = document.getElementById('errorEmail');
+                    if (!errorEmail.classList.contains('hidden')) {
+                        errorEmail.classList.toggle('hidden');
+                    }
+                    if (emailEncrypted.classList.contains('hidden')) {
+                        emailEncrypted.classList.toggle('hidden');
+                        emailEncrypted.innerText = "Encriptado com MD5: " + hashString;
+                    } else {
+                        emailEncrypted.innerText = "Encriptado com MD5: " + hashString;
+                    }
+
+                } else {
+                    const errorEmail = document.getElementById('errorEmail');
+                    const emailEncrypted = document.getElementById('emailEncrypted');
+
+                    if (!emailEncrypted.classList.contains('hidden')) {
+                        emailEncrypted.classList.toggle('hidden');
+                    }
+
+                    if (errorEmail.classList.contains('hidden')) {
+                        errorEmail.classList.toggle('hidden');
+                        errorEmail.innerText = 'O email inserido não é válido';
+                    } else {
+                        errorEmail.innerText = 'O email inserido não é válido';
+                    }
+                }
+            }
+        }
+
+        function encryptEmailwithSHA1() {
+            const emailInput = document.getElementById('email');
+
+            if (emailInput.value === '') {
+                const errorEmail = document.getElementById('errorEmail');
+                const emailEncrypted = document.getElementById('emailEncrypted');
+                if (!emailEncrypted.classList.contains('hidden')) {
+                    emailEncrypted.classList.toggle('hidden');
+                }
+                if (errorEmail.classList.contains('hidden')) {
+                    errorEmail.classList.toggle('hidden');
+                    errorEmail.innerText = 'É necessário inserir um email';
+                } else {
+                    errorEmail.innerText = 'É necessário inserir um email';
+                }
+                
+            } else {
+                const emailValid = validateEmail();
+
+                if (emailValid) {
+                    var hash = CryptoJS.SHA1(emailInput.value);
+                    var hashString = hash.toString(CryptoJS.enc.Base64);
+                    const emailEncrypted = document.getElementById('emailEncrypted');
+                    const errorEmail = document.getElementById('errorEmail');
+                    if (!errorEmail.classList.contains('hidden')) {
+                        errorEmail.classList.toggle('hidden');
+                    }
+                    if (emailEncrypted.classList.contains('hidden')) {
+                        emailEncrypted.classList.toggle('hidden');
+                        emailEncrypted.innerText = "Encriptado com SHA-1: " + hashString;
+                    } else {
+                        emailEncrypted.innerText = "Encriptado com SHA-1: " + hashString;
+                    }
+
+                } else {
+                    const errorEmail = document.getElementById('errorEmail');
+                    const emailEncrypted = document.getElementById('emailEncrypted');
+
+                    if (!emailEncrypted.classList.contains('hidden')) {
+                        emailEncrypted.classList.toggle('hidden');
+                    }
+
+                    if (errorEmail.classList.contains('hidden')) {
+                        errorEmail.classList.toggle('hidden');
+                        errorEmail.innerText = 'O email inserido não é válido';
+                    } else {
+                        errorEmail.innerText = 'O email inserido não é válido';
+                    }
+                }
+            }
+        }
+
+        function encryptEmailwithSHA256() {
+            const emailInput = document.getElementById('email');
+
+            if (emailInput.value === '') {
+                const errorEmail = document.getElementById('errorEmail');
+                const emailEncrypted = document.getElementById('emailEncrypted');
+                if (!emailEncrypted.classList.contains('hidden')) {
+                    emailEncrypted.classList.toggle('hidden');
+                }
+                if (errorEmail.classList.contains('hidden')) {
+                    errorEmail.classList.toggle('hidden');
+                    errorEmail.innerText = 'É necessário inserir um email';
+                } else {
+                    errorEmail.innerText = 'É necessário inserir um email';
+                }
+                
+            } else {
+                const emailValid = validateEmail();
+
+                if (emailValid) {
+                    var hash = CryptoJS.SHA256(emailInput.value);
+                    var hashString = hash.toString(CryptoJS.enc.Base64);
+                    const emailEncrypted = document.getElementById('emailEncrypted');
+                    const errorEmail = document.getElementById('errorEmail');
+                    if (!errorEmail.classList.contains('hidden')) {
+                        errorEmail.classList.toggle('hidden');
+                    }
+                    if (emailEncrypted.classList.contains('hidden')) {
+                        emailEncrypted.classList.toggle('hidden');
+                        emailEncrypted.innerText = "Encriptado com SHA256: " + hashString;
+                    } else {
+                        emailEncrypted.innerText = "Encriptado com SHA256: " + hashString;
+                    }
+
+                } else {
+                    const errorEmail = document.getElementById('errorEmail');
+                    const emailEncrypted = document.getElementById('emailEncrypted');
+
+                    if (!emailEncrypted.classList.contains('hidden')) {
+                        emailEncrypted.classList.toggle('hidden');
+                    }
+
+                    if (errorEmail.classList.contains('hidden')) {
+                        errorEmail.classList.toggle('hidden');
+                        errorEmail.innerText = 'O email inserido não é válido';
+                    } else {
+                        errorEmail.innerText = 'O email inserido não é válido';
+                    }
+                }
+            }
+        }
+
+        function encryptMessage(){
+            const messageInput = document.getElementById('mensagem');
+            const keyInput = document.getElementById('key');
+
+            if (messageInput.value == "" ){
+                const errorMsg = document.getElementById('errorMsg');
+                const msgEncrypted = document.getElementById('msgEncrypted');
+                if (!msgEncrypted.classList.contains('hidden')) {
+                    msgEncrypted.classList.toggle('hidden');
+                }
+                if (errorMsg.classList.contains('hidden')) {
+                    errorMsg.classList.toggle('hidden');
+                    errorMsg.innerText = 'Ainda não introduziu uma mensagem';
+                } else {
+                    errorMsg.innerText = 'Ainda não introduziu uma mensagem';
+                }
+            } else if (keyInput.value == "") {
+                const errorMsg = document.getElementById('errorMsg');
+                const msgEncrypted = document.getElementById('msgEncrypted');
+                if (!msgEncrypted.classList.contains('hidden')) {
+                    msgEncrypted.classList.toggle('hidden');
+                }
+                if (errorMsg.classList.contains('hidden')) {
+                    errorMsg.classList.toggle('hidden');
+                    errorMsg.innerText = 'Ainda não introduziu uma chave de encriptação';
+                } else {
+                    errorMsg.innerText = 'Ainda não introduziu uma chave de encriptação';
+                }
+            } else {
+                var encrypted = CryptoJS.AES.encrypt(messageInput.value, keyInput.value);
+                const errorMsg = document.getElementById('errorMsg');
+                const msgEncrypted = document.getElementById('msgEncrypted');
+                if (!errorMsg.classList.contains('hidden')) {
+                    errorMsg.classList.toggle('hidden');
+                }
+                if (msgEncrypted.classList.contains('hidden')) {
+                    msgEncrypted.classList.toggle('hidden');
+                    msgEncrypted.innerText = "Mensagem Encriptada: " + encrypted.toString();
+                } else {
+                    msgEncrypted.innerText = "Mensagem Encriptada: " + encrypted.toString();
+                }
+
+                messageInput.value = "";
+                keyInput.value = "";
+            }
+        }
+
+        function decryptMessage(){
+            const messageInput = document.getElementById('mensagem');
+            const keyInput = document.getElementById('key');
+
+            if (messageInput.value == "" ){
+                const errorMsg = document.getElementById('errorMsg');
+                const msgEncrypted = document.getElementById('msgEncrypted');
+                if (!msgEncrypted.classList.contains('hidden')) {
+                    msgEncrypted.classList.toggle('hidden');
+                }
+                if (errorMsg.classList.contains('hidden')) {
+                    errorMsg.classList.toggle('hidden');
+                    errorMsg.innerText = 'Ainda não introduziu uma mensagem';
+                } else {
+                    errorMsg.innerText = 'Ainda não introduziu uma mensagem';
+                }
+            } else if (keyInput.value == "") {
+                const errorMsg = document.getElementById('errorMsg');
+                const msgEncrypted = document.getElementById('msgEncrypted');
+                if (!msgEncrypted.classList.contains('hidden')) {
+                    msgEncrypted.classList.toggle('hidden');
+                }
+                if (errorMsg.classList.contains('hidden')) {
+                    errorMsg.classList.toggle('hidden');
+                    errorMsg.innerText = 'Ainda não introduziu uma chave de encriptação';
+                } else {
+                    errorMsg.innerText = 'Ainda não introduziu uma chave de encriptação';
+                }
+            } else {
+                var decrypted = CryptoJS.AES.decrypt(messageInput.value, keyInput.value);
+
+                if (decrypted.sigBytes <= 0) {
+                    const errorMsg = document.getElementById('errorMsg');
+                    const msgEncrypted = document.getElementById('msgEncrypted');
+                    if (!msgEncrypted.classList.contains('hidden')) {
+                        msgEncrypted.classList.toggle('hidden');
+                    }
+                    if (errorMsg.classList.contains('hidden')) {
+                        errorMsg.classList.toggle('hidden');
+                        errorMsg.innerText = 'A chave de encriptação está errada';
+                    } else {
+                        errorMsg.innerText = 'A chave de encriptação está errada';
+                    }
+                    
+                } else {
+                    const errorMsg = document.getElementById('errorMsg');
+                    const msgEncrypted = document.getElementById('msgEncrypted');
+                    if (!errorMsg.classList.contains('hidden')) {
+                        errorMsg.classList.toggle('hidden');
+                    }
+                    if (msgEncrypted.classList.contains('hidden')) {
+                        msgEncrypted.classList.toggle('hidden');
+                        msgEncrypted.innerText = "Mensagem Desencriptada: " + decrypted.toString(CryptoJS.enc.Utf8);
+                    } else {
+                        msgEncrypted.innerText = "Mensagem Desencriptada: " + decrypted.toString(CryptoJS.enc.Utf8);
+                    }
+
+                    messageInput.value = "";
+                    keyInput.value = "";
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<div class="container my-5 bg-light border rounded-4 p-5 d-flex flex-column justify-content-center align-items-center">
+    <h2 class="text-uppercase text-success">Cria a tua Receita - Unete à Comunidade</h2>
+    <div class="border border-1 border-success rounded-3 mt-3 w-75">
+        <form class="p-5" enctype="multipart/form-data" ng-submit="print()">
+            <div class="mb-3">
+                <label for="titulo" class="form-label text-success fw-light">Titulo:</label>
+                <input type="text"  ng-model="receita.titulo" name="titulo" class="form-control border-success" autofocus placeholder="ex: Hambuguer de Carne" required>
+            </div>
+            <div class="mb-3">
+                <label for="dificuldade" class="form-label text-success fw-light">Dificuldade:</label>
+                <input type="text" name="dificuldade" ng-model="receita.dificuldade" class="form-control  border-success" placeholder="ex: Dificil" required>
+            </div>
+            <div class="mb-3">
+                <label for="tempoPreparacao" class="form-label text-success fw-light">Tempo de Preparação:</label>
+                <input type="number" ng-model="receita.tempoPreparacao" name="tempoPreparacao" class="form-control  border-success"  placeholder="ex: 150 minutos" required>
+            </div>
+            <div class="mb-3">
+                <label for="descricao" class="form-label text-success fw-light">Descrição:</label>
+                <textarea ng-model="receita.descricao" class="form-control  border-success"  name="descricao" id="descricao" rows="3"  placeholder="Escreva uma descrição..." required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="pasos" class="form-label text-success fw-light">Passos:</label>
+                <div ng-repeat="paso in receita.pasos track by $index">
+                    <input type="text" ng-model="paso.descricao" class="form-control border-success my-3" placeholder="Descrição do passo" required>
+                </div>
+                <button type="button" ng-click="addPaso()" class="btn btn-outline-success mt-2">Adicionar Passo</button>
+                <button type="button" ng-click="removePaso($index)" class="btn btn-outline-danger mt-2">Remover Passo</button>
+            </div>
+
+            <div class="mb-3">
+                <label for="ingredientes" class="form-label text-success fw-light">Ingredientes:</label>
+                <div ng-repeat="ingrediente in receita.ingredientes track by $index">
+                    <input type="text" ng-model="receita.ingredientes[$index]" class="form-control border-success my-3" placeholder="Nome do ingrediente" required>
+                    <button type="button" ng-click="removeIngrediente($index)" class="btn btn-outline-danger mt-2">Remover Ingrediente</button>
+                </div>
+                <button type="button" ng-click="addIngrediente()" class="btn btn-outline-success mt-2">Adicionar Ingrediente</button>
+            </div>
+            <div class="mb-3">
+                <label for="imagem" class="form-label text-success  fw-light">Imagem:</label>
+                <input type="file" class="form-control  border-success file-input" name="imagem" ng-model="receita.imagem" required>
+            </div>
+            <div class="mb-3">
+                <label for="categoria" class="form-label text-success fw-light">Categoria:</label>
+                <select  class="form-select border-success" name="categoria" required>
+                    <option selected disabled>Escolha uma categoria</option>
+                    <option value="Pequeno-Almoco">Pequeno-Almoco</option>
+                    <option value="Almoco">Almoco</option>
+                    <option value="Jantar">Jantar</option>
+                    <option value="Lanches">Lanches</option>
+                    <option value="Sobremesas">Sobremesas</option>
+                    <option value="Batidos com Alcool">Batidos com Alcool</option>
+                    <option value="Batidos sem Alcool">Batidos sem Alcool</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Criar Receita</button>
+           
+        </form>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Stores>
+    <storeId>1</storeId>
+    <name>Roupas Fixes</name>
+    <releaseDate>10-01-2021</releaseDate>
+    <openingAt>09:00:00</openingAt>
+    <closingAt>19:00:00</closingAt>
+    <employees>
+        <employeId>1</employeId>
+        <firstname>Joao</firstname>
+        <lastname>Sousa</lastname>
+        <age>20</age>
+        <phone>987654321</phone>
+    </employees>
+    <employees>
+        <employeId>2</employeId>
+        <firstname>Andreia</firstname>
+        <lastname>Pinto</lastname>
+        <age>23</age>
+    </employees>
+    <employees>
+        <employeId>3</employeId>
+        <firstname>Patricia</firstname>
+        <lastname>Silva</lastname>
+        <age>22</age>
+        <phone>123456789</phone>
+    </employees>
+</Stores>

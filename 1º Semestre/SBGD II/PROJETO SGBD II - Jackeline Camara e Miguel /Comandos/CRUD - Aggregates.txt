@@ -1,0 +1,88 @@
+AGREGATES 
+
+1. Calcular o promedio de pasos em todas as receitas
+
+
+ db.receitas.aggregate([
+  {
+    $group: {
+      _id: null,
+      promedioPasos: { $avg: { $size: "$pasos" } }
+    }
+  }
+]);
+
+2. Encontrar os utilizadores que têm comentado pelo menos uma receita
+
+
+db.utilizadores.aggregate([
+  {
+    $lookup: {
+      from: "comentarios",
+      localField: "_id",
+      foreignField: "utilizador_id",
+      as: "comentariosUtilizador"
+    }
+  },
+  {
+    $match: {
+      comentariosUtilizador: { $ne: [] }
+    }
+  },
+  {
+    $project: {
+      username: 1, _id: 0
+    }
+  }
+])
+
+
+3. Contar numero total de recetas
+
+db.receitas.aggregate([
+  {
+    $group: {
+      _id: null,
+      totalRecetas: { $sum: 1 }
+    }
+  }
+])
+
+
+4. Visualizar informações detalhadas das receitas que pertenecem a uma determinada categoria e adicionar informação sobre o utilizador que crio a receita
+
+db.receitas.aggregate([
+  {
+    $match: {
+      categoria_id: ObjectId("659c9e023399572dd56d6767")
+    }
+  },
+  {
+    $lookup: {
+      from: "utilizadores",
+      localField: "utilizador_id",
+      foreignField: "_id",
+      as: "utilizador"
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      titulo: 1,
+      descripcion: 1,
+      tempoPreparacao: 1,
+      dificuldade: 1,
+      imagem: 1,
+      pasos: 1,
+      nombreUsuario: "$utilizador.username"
+    }
+  }
+]);
+
+
+5. Mostra as receitas de todos os utilizadores
+
+
+db.utilizadores.aggregate([{$lookup: {from: "receitas", localField: "_id", foreignField: "utilizador_id", as: "Receitas_dos_Utilizadores"}}, {$match: {
+      Receitas_dos_Utilizadores: { $ne: [] },
+    } {$project: {"username": 1, "Receitas_dos_Utilizadores.titulo": 1 }}])

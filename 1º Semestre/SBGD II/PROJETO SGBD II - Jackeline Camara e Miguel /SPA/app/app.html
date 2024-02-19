@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Receitas Saborosas</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.20/angular-ui-router.js"></script>
+
+
+    <script src="app.js"></script>
+    <script src="./controllers/receitasController.js"></script>
+    <script src="./controllers/authController.js"></script>
+    <script src="./controllers/favoritosController.js"></script>
+    <script src="./controllers/adminController.js"></script>
+</head>
+
+ <body ng-app="routerApp">
+
+ <!-- Navigation -->
+ <header class="p-3 border-bottom bg-light" id="header">
+    <div class="ms-2 me-2">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none me-3">
+            <img src="/images/logo.png" width="50" height="50" alt="" style="filter: invert(36%) sepia(95%) saturate(377%) hue-rotate(100deg) brightness(94%) contrast(88%);">
+        </a>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 gap-1">
+          <a href="/#!/home" class="nav-link px-2 link-success links-navbar">Home</a>
+          <a href="/#!/postRecipes" class="nav-link px-2 link-success links-navbar authOn d-none">Criar a tua Receita</a>
+        </ul>
+        
+        <div class="col-md-3 text-end">
+              <a href="/#!/login" class="btn btn-outline-success me-2 authOff">Login</a>
+              <a href="/#!/signup" class="btn btn-outline-success me-2 authOff">Sign-up</a>
+        </div>
+        <a href="/#!/favoritos" class="link-success authOn d-none"><i class="fa-solid fa-heart fs-4 px-3"></i></a>
+          <div class="dropdown text-end d-flex align-items-center authOn d-none">
+            <a class="d-block link-success text-decoration-none dropdown-toggle text-success" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="/images/profile.svg" width="40" height="40"  alt="" style="filter: invert(36%) sepia(95%) saturate(377%) hue-rotate(100deg) brightness(94%) contrast(88%);">
+            </a>
+            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+              <li><a href="/#!/userRecipes" class="dropdown-item">Minhas Receitas</a></li>
+              
+                <li><a href="/#!/admin" id="adminOn" class="dropdown-item d-none">Administrador</a></li>
+              
+              <li><hr class="dropdown-divider"></li>
+              <li style="cursor: pointer;">
+                  <a id="logout" class="dropdown-item">Sign out</a>
+              </li>
+            </ul>
+          </div>
+       
+      </div>
+    </div>
+  </header>
+
+ <!-- Page Content -->
+ <div class="container my-5" style="min-height: 100vh;">
+  
+     <div ui-view></div>
+ </div>
+ <!-- /.container -->
+
+ <!-- Footer -->
+ <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-light ps-2 pe-2" id="footer">
+    <p class="col-md-4 mb-0 text-muted">©Receitas Saborosas 2024 JM, Inc</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <img src="/images/logo.png" width="80" height="80" alt="" style="filter: invert(36%) sepia(95%) saturate(377%) hue-rotate(100deg) brightness(94%) contrast(88%);">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+        <a href="/" class="nav-link px-2 link-success links-navbar">Home</a>
+        <a href="/#!/login" class="nav-link px-2 link-success links-navbar authOff">Login</a>
+        <a href="/#!/signup" class="nav-link px-2 link-success links-navbar authOff">Sign Up</a>
+    </ul>
+</footer>
+
+		  <!-- Bootstrap core JavaScript -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/99635f9b16.js" crossorigin="anonymous"></script>
+
+  </body>
+</html>

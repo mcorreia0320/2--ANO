@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <sshexec trust="true" password="jmad" port="22" usepty="true" suppresssystemerr="true" host="192.168.1.143" failonerror="false" suppresssystemout="true" useSystemIn="false" command="sudo killall -9 java" username="jmad" />
+    <sshexec trust="true" password="jmad" port="22" host="192.168.1.143" command="mkdir --parents /home/jmad/deploy; rm -f /home/jmad/deploy/*" username="jmad" />
+    <scp trust="true" todir="jmad:jmad@192.168.1.143:/home/jmad/deploy" port="22">
+      <fileset dir="/Users/miguelcorreia/Documents/AULAS/Universidade/2º ANO/1º Semestre/Arquitectura de Dispositivos/pi4j-template/target/distribution" />
+    </scp>
+    <sshexec trust="true" password="jmad" port="22" usepty="true" host="192.168.1.143" failonerror="false" useSystemIn="true" command="sudo java  --module-path /home/jmad/deploy --module pt.tpsi.ad.pi4j/pt.tpsi.ad.pi4j.Launcher " username="jmad" />
+  </target>
+</project>

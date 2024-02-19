@@ -1,0 +1,19 @@
+<section class="my-5">
+    <h2 class="text-success text-center">VEJA AQUI AS NOSSAS RECEITAS:</h2>
+    <p class="text-success text-center fw-light ">Receitas: ({{receitas.length}}) </p>
+    
+    <div class="algumas-receitas mt-4 p-1 container" ng-if="receitas.length > 0">
+        <div ng-repeat="receita in receitas" ng-click="redirectDetails(receita._id)" class="receitas-pesquisa bg-success bg-opacity-50 border-3  border border-success">
+            <div class="top-card h-75">
+                <img src="{{ receita.imagem }}" class="h-100 w-100">
+            </div>
+            <div class="end-card h-25 w-100 bg-light rounded-bottom-2 d-flex flex-column  justify-content-center align-items-center border-top border-success p-2">
+                <h2 class="text-success fw-light m-0" style="font-size: 100%">{{receita.titulo}}</h2>
+                <p class="text-success fw-bolder m-0"  style="font-size: 100%">{{receita.dificuldade}}</p>
+            </div>
+        </div>
+    </div>
+    <div ng-if="receitas.length === 0" class="flex align-items-center justify-content-center text-success ">
+        <h1>NÃO EXISTEM RECEITAS!</h1>
+    </div>
+</section>

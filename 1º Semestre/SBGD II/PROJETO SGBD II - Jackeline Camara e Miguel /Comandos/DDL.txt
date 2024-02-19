@@ -1,0 +1,176 @@
+DDL:
+
+// Criar a base de dados
+
+use Receitas
+
+// Criar Colecções com os seus esquemas de validação e indices
+
+*** Colecção utilizadores ***
+
+db.createCollection("utilizadores", {
+	validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["username", "email", "password", 			"favoritos"],
+			properties: {
+				username: {
+					bsonType: "string",
+					description: "must be a string and is required"
+				},
+				email: {
+					bsonType: "string",
+					description: "must be a string and is required"
+				},
+				password: {
+					bsonType: "string",
+					minLength: 6
+					description: "must be a string with minimum 6 letters and is required"
+				},
+				favoritos: {
+					bsonType: "array",
+					description: "must be a array and is required"
+				}
+			}
+		}
+	}, validationLevel: "strict", validationAction: "error"
+})
+
+// Para facilitar a pesquisa de na colecção atraves dos indeces email e username
+db.utilizadores.createIndex( { "email": 1 }, { unique: true })
+db.utilizadores.createIndex( { "username": 1 }, { unique: true })
+
+
+
+
+
+
+
+
+
+
+*** Colecção comentarios ***
+
+db.createCollection("comentarios", {
+	validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["pontuacao", "descricao", 				"utilizador_id", "receita_id"],
+			properties: {
+				pontuacao: {
+					bsonType: "int",
+					minimum: 1,
+					maximum: 5,
+					exclusiveMaximum: false
+					description: "must be a int in [ 1 , 5 ] and is required"
+				},
+				descricao: {
+					bsonType: "string",
+					description: "must be a string and is required"
+				},
+				utilizador_id: {
+					bsonType: "objectId",
+					description: "must be a objectId and is required"
+				}
+			}
+		}
+	}, validationLevel: "strict", validationAction: "error"
+})
+
+
+*** Colecção receitas ***
+
+db.createCollection("receitas", {
+	validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["titulo", "descricao", "tempoPreparacao", "dificuldade", "imagem", "pasos", "categoria_id", "utilizador_id", "ingrediente_id"],
+			properties: {
+				titulo: {
+					bsonType: "string",
+					description: "must be a string and is required"
+				},
+				descricao: {
+					bsonType: "string",
+					description: "must be a string and is required"
+				},
+				tempoPreparacao: {
+					bsonType: "int",
+					description: "must be a int and is required"
+				},
+				dificuldade: {
+					bsonType: "string",
+					description: "must be a string and is required"
+				},
+				imagem: {
+					bsonType: "string",
+					description: "must be a string and is required"
+				},
+				pasos: {
+					bsonType: "array",
+					description: "must be a array and is required",
+					items: {
+						bsonType: "object",
+						required: ["descricao"], properties: {descricao: {bsonType: "string"}}
+					}
+				},
+				categoria_id: {
+					bsonType: "objectId",
+					description: "must be a objectId and is required"
+				},
+				utilizador_id: {
+					bsonType: "objectId",
+					description: "must be a objectId and is required"
+				},
+				ingrediente_id: {
+					bsonType: "array",
+					description: "must be a array and is required"
+				}
+			}
+		}
+	}, validationLevel: "strict", validationAction: "error"
+})
+
+*** Colecção categorias ***
+
+db.createCollection("categorias", {
+	validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["nome"],
+			properties: {
+				nome: {
+					bsonType: "string",
+					description: "must be a string and is required"
+				}
+			}
+		}
+	}, validationLevel: "strict", validationAction: "error"
+})
+
+db.categorias.createIndex( { "nome": 1 }, { unique: true })
+
+
+*** Colecção ingredientes ***
+
+db.createCollection("ingredientes", {
+	validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["nome", "receita_id"],
+			properties: {
+				nome: {
+					bsonType: "string",
+					description: "must be a string and is required"
+				},
+				receita_id: {
+					bsonType: "array",
+					description: "must be a array and is required"
+				}
+			}
+		}
+	}, validationLevel: "strict", validationAction: "error"
+})
+
+// Para facilitar a pesquisa por nome de ingrediente
+db.ingredientes.createIndex( { "nome": 1 }, { unique: true })

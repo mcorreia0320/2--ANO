@@ -1,0 +1,31 @@
+DELETES
+
+1.Apagar todas as receitas de unm utilizador
+
+db.receitas.deleteMany({"utilizador_id": ObjectId("659ca6f13399572dd56d676a")})
+
+2. Apagar um ingrediente e a sua referencia na coleção receitas
+
+var ingrediente = db.ingredientes.findOne({"_id": 15})
+db.receitas.updateMany({}, { $pull: { "ingrediente_id": ingrediente._id } })
+db.ingredientes.deleteOne({"_id": 15})
+
+3. Apagar todas as receitas que têm o ingrediente com o id 13
+
+db.receitas.deleteMany({"ingrediente_id": 13})
+
+4. Apagar todas as receitas que tenham um tempo de preparação entre 10 e 20 minutos
+
+db.receitas.deleteMany({"tempoPreparacao": {$lte: 10, $lte: 20}})
+
+5. Apagar as receitas que tenham mas de 4 passos
+
+db.receitas.deleteMany({$expr: {$gt: [{$size: "$pasos"}, 4]}})
+
+6. Apagar utilizador pelo seu username 
+
+db.utilizadores.deleteOne({"username": "carlos2002"})
+
+7. Apagar todos os comentarios de um determinado utilizador
+
+db.comentarios.deleteMany({"utilizador_id":  ObjectId("659f49f7b494e420d9da8913")})

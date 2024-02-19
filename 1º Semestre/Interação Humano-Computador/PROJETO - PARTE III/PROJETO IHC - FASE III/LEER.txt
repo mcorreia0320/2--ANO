@@ -1,0 +1,18 @@
+Boa noite professor, este txt é apenas para indicar ao professor como pode testar o projeto no seu computador se quiser. Por tanto, é assim:
+
+- Precisa de ter Visual Studio Code
+- Ter instalado XAMPP e iniciar o servidor de APACHE e MySQL
+- Precisa de instalar lavável no seu computador
+
+Após as instalações:
+
+- Deve aceder ao phpmyadmin desde o browser (Deve iniciar o servidor de APACHE e MySQL primeiro)
+- Deve criar uma base de dados com o nome "paf"
+- Deve importar o ficheiro sql que se encontra na pasta na base de dados "paf"
+- Depois pode abrir o projeto no visual studio Code, deve ter a certeza de que se encontra na rota adequado, isto é no terminal o path deve ser o do projeto
+- Após de verificar o path deve executar o comando "php artisan serve"
+- Deve abrir outro terminal e executar o comando "npm run dev"
+- E depois já consegue testar o projeto no seu browser
+
+
+Obrigado :)

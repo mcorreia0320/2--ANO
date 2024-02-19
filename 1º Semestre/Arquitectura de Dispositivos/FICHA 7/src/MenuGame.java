@@ -1,0 +1,3 @@
+public enum MenuGame {
+    START, SAVEGAME, LOADGAME, HIGHSCORES, QUIT
+}

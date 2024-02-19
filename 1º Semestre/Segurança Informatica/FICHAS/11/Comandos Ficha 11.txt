@@ -1,0 +1,149 @@
+-- Apagar todas as configurações existentes no router --
+erase startup-config
+reload
+
+-- Carregar o licenciamento de Segurança nos Routers -- No router intermediario
+license boot module c1900 technology-package securityk9	
+yes
+do wr
+do reload
+
+
+-- Mensagem de Banner --
+banner motd %!! UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED !! 
+
+You must have explicit, authorized permission to access or configure this device. 
+Unauthorized attempts and actions to access or use this system may result in civil and/or criminal penalties. 
+All activities performed on this device are logged and monitored.%
+
+-- Desativar pesquisa DNS e Definir o Clock das ligações DCE --
+
+no ip domain-lookup
+interface s0/0/0
+clock rate 64000
+
+-- Configurar o protocolo de roteamento OSPF --
+
+router ospf 101
+Network [endereço de rede das ligações] [inverso da mascara de subrede] área 0
+Exemplos:
+network 192.168.1.0 0.0.0.255 area 0
+network 10.1.1.0 0.0.0.3 area 0
+
+-- Configurar rolamento estatico --
+
+ip route [ip destino] [mascara de subrede] [Interface de salida ou next host en la red de entrada]
+
+-- Configure e criptografe senhas -- (conf t)
+
+//Ativar servicio de encriptacion
+service password-encrypatation
+
+// Minimo de caracteres para o password
+security passwords min-length [numeroMinimo]
+
+// Senha modo previlegiado
+enable secret 9 [pass]
+
+// Criar uma conta 
+username [nome de usuario] secret 9 [pass]
+
+// Bloqueia 60 segundos as tentativas de login, caso falhem 2 vezes num espaço de 10 segundos
+login block-for 60 attempts 2 within 10
+
+-- Configure a linha do console --
+
+line con 0
+login local
+exec-timeout 5 0
+logging synchronous
+
+-- Configure o servidor SSH -- Em todos os routers
+
+// Configurar um nome de domínio 
+ip domain-name netsec.com 
+
+// Configurar as chaves RSA com 2048 para o número de bits de módulo
+crypto key generate rsa general-keys modulus 2048
+
+// Comando para forçar o uso da versão 2 do SSH
+ip ssh version 2
+
+// Configurar linhas vty #Em todos menos el intermediario
+line vty 0 4
+login local
+transport input ssh
+exec-timeout 5 0
+logging synchronous
+
+// Configurar linha aux 0 #Em todos menos el intermediario
+line aux 0
+login local
+exec-timeout 5 0
+logging synchronous
+
+-- Configurar uma VPN de Site a Site  --
+
+** Tarefa 1: Configurar ajustes do IPsec VPN **
+
+// Habilitar as políticas de IKE no R1 e R3 para que o IPsec funcione
+crypto isakmp enable 
+
+// Permitir a negociação IKE no R1 e R3
+crypto isakmp policy 10
+hash sha
+authentication pre-share
+group 5
+lifetime 3600
+encryption aes 256
+
+//Verificar politica de IKE
+show crypto isakmp policy
+
+//Configurar pre-shared keys que são usadas como método de autenticação em IKE
+crypto isakmp key [string-key] address [ip de la salida DCE en el otro router]
+Ejemplos:
+
+crypto isakmp key cisco123 address 10.2.2.1 -> R1
+crypto isakmp key cisco123 address 10.1.1.1 -> R3
+
+Acá definimos los parámetros necesarios para la conexión de R1 e R3, verificando través de la string key que tienen que ser iguales la autenticação entre los mismos.
+
+//Configurar o IPsec transform o grup e o lifetime
+
+crypto ipsec transform-set 50 esp-aes 256 esp-sha-hmac  em R1 e R3
+
+Este conjunto de transformações é uma combinação de algoritmos e chaves que são usados para proteger o tráfego de rede.
+
+crypto ipsec security-association lifetime seconds 1800  em R1 e R3
+
+//Defina tráfego interessante do IPsec VPN ACL
+access-list 101 permit ip 192.168.1.0 0.0.0.255 192.168.3.0 0.0.0.255 ACL estendida que permite el trafico desde R1 a R3
+
+access-list 101 permit ip 192.168.3.0 0.0.0.255 192.168.1.0 0.0.0.255 ACL estendida que permite el trafico desde R3 a R1
+
+//Criar mapa de criptografia
+# EM R1
+crypto map CMAP 10 ipsec-isakmp
+match address 101
+set peer 10.2.2.1 --> Salida DCE del otro Router
+set pfs group5
+set transform-set 50
+set security-association lifetime seconds 900
+#EM R3
+crypto map CMAP 10 ipsec-isakmp
+match address 101
+set peer 10.1.1.1  --> Salida DCE del otro Router
+set pfs group5
+set transform-set 50
+set security-association lifetime seconds 900
+
+//Aplicar mapa ás interfaces
+#EM R1 
+interface Serial 0/0/0
+crypto map CMAP
+#EM R3
+interface Serial 0/0/1
+crypto map CMAP
+
+

@@ -1,0 +1,30 @@
+@import "home";
+@import "detalhes";
+
+
+html, body {
+    min-height: 100% !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 500 !important;
+    background-color: #E9FFE3;
+    letter-spacing: 1px;
+  }
+
+  .bg-color{
+    background-color: #E9FFE3;
+  }
+  
+  .links-navbar:hover{
+    text-decoration: underline;
+  }
+
+  p{
+    word-wrap: break-word;
+  }
+
+  .img-fluid{
+    object-fit: cover;
+    height: 100% !important;
+    filter: brightness(0.3);
+    border-radius: 1rem 0 0 1rem;
+  }

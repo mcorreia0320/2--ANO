@@ -1,0 +1,289 @@
+// EXERCICIO 1
+
+use ClubeVideo
+
+db.cliente.insertMany([{
+    "_id": 1,
+    "nome": "João Silva",
+    "morada": "Rua da Amizade, 123",
+    "telefone": "555-123-4567"
+  },
+  {
+    "_id": 2,
+    "nome": "Maria Santos",
+    "morada": "Avenida Central, 789",
+    "telefone": "555-987-6543"
+  },
+  {
+    "_id": 3,
+    "nome": "Pedro Pereira",
+    "morada": "Rua das Flores, 456",
+    "telefone": "555-345-6789"
+  },
+  {
+    "_id": 4,
+    "nome": "Ana Carvalho",
+    "morada": "Travessa do Sol, 234",
+    "telefone": "555-678-9012"
+  },
+  {
+    "_id": 5,
+    "nome": "Luís Oliveira",
+    "morada": "Praça Principal, 567",
+    "telefone": "555-234-5678"
+  },
+  {
+    "_id": 6,
+    "nome": "Marta Ferreira",
+    "morada": "Rua das Palmeiras, 890",
+    "telefone": "555-456-7890"
+  },
+  {
+    "_id": 7,
+    "nome": "José Sousa",
+    "morada": "Avenida do Sol, 765",
+    "telefone": "555-890-1234"
+  },
+  {
+    "_id": 8,
+    "nome": "Rita Alves",
+    "morada": "Praça da Liberdade, 654",
+    "telefone": "555-345-6789"
+  },
+  {
+    "_id": 9,
+    "nome": "António Ribeiro",
+    "morada": "Rua das Estrelas, 543",
+    "telefone": "555-678-9012"
+  },
+  {
+    "_id": 10,
+    "nome": "Isabel Teixeira",
+    "morada": "Avenida Central, 123",
+    "telefone": "555-234-5678"
+  }])
+
+db.video.insertMany([{
+    "_id": 1,
+    "título": "O Poderoso Chefão",
+    "género": "Crime",
+    "duração": "175 minutos",
+    "empresa_distribuição": "Paramount Pictures"
+  },
+  {
+    "_id": 2,
+    "título": "Star Wars: Uma Nova Esperança",
+    "género": "Ficção Científica",
+    "duração": "121 minutos",
+    "empresa_distribuição": "20th Century Fox"
+  },
+  {
+    "_id": 3,
+    "título": "Jurassic Park",
+    "género": "Aventura",
+    "duração": "127 minutos",
+    "empresa_distribuição": "Universal Pictures"
+  },
+  {
+    "_id": 4,
+    "título": "E.T. - O Extraterrestre",
+    "género": "Família",
+    "duração": "115 minutos",
+    "empresa_distribuição": "Universal Pictures"
+  },
+  {
+    "_id": 5,
+    "título": "Titanic",
+    "género": "Drama",
+    "duração": "195 minutos",
+    "empresa_distribuição": "20th Century Fox"
+  },
+  {
+    "_id": 6,
+    "título": "Matrix",
+    "género": "Ficção Científica",
+    "duração": "136 minutos",
+    "empresa_distribuição": "Warner Bros."
+  },
+  {
+    "_id": 7,
+    "título": "O Rei Leão",
+    "género": "Animação",
+    "duração": "88 minutos",
+    "empresa_distribuição": "Walt Disney Pictures"
+  },
+  {
+    "_id": 8,
+    "título": "Forrest Gump",
+    "género": "Drama",
+    "duração": "142 minutos",
+    "empresa_distribuição": "Paramount Pictures"
+  },
+  {
+    "_id": 9,
+    "título": "O Senhor dos Anéis: A Sociedade do Anel",
+    "género": "Fantasia",
+    "duração": "178 minutos",
+    "empresa_distribuição": "New Line Cinema"
+  },
+  {
+    "_id": 10,
+    "título": "Harry Potter e a Pedra Filosofal",
+    "género": "Fantasia",
+    "duração": "152 minutos",
+    "empresa_distribuição": "Warner Bros."
+  }])
+
+
+db.aluguer.insertMany([{
+    "_id": 1,
+    "data_saida": ISODate("2023-10-11T10:00:00Z"),
+    "data_entrada": ISODate("2023-10-15T12:00:00Z"),
+    "cliente_id": 1,
+    "video_id": 1
+  },
+  {
+    "_id": 2,
+    "data_saida": ISODate("2023-10-12T11:00:00Z"),
+    "data_entrada": ISODate("2023-10-16T13:00:00Z"),
+    "cliente_id": 2,
+    "video_id": 3
+  },
+  {
+    "_id": 3,
+    "data_saida": ISODate("2023-10-13T12:00:00Z"),
+    "data_entrada": ISODate("2023-10-17T14:00:00Z"),
+    "cliente_id": 3,
+    "video_id": 2
+  },
+  {
+    "_id": 4,
+    "data_saida": ISODate("2023-10-14T13:00:00Z"),
+    "data_entrada": ISODate("2023-10-18T15:00:00Z"),
+    "cliente_id": 4,
+    "video_id": 4
+  },
+  {
+    "_id": 5,
+    "data_saida": ISODate("2023-10-15T14:00:00Z"),
+    "data_entrada": ISODate("2023-10-19T16:00:00Z"),
+    "cliente_id": 5,
+    "video_id": 5
+  },
+  {
+    "_id": 6,
+    "data_saida": ISODate("2023-10-16T15:00:00Z"),
+    "data_entrada": ISODate("2023-10-20T17:00:00Z"),
+    "cliente_id": 6,
+    "video_id": 6
+  },
+  {
+    "_id": 7,
+    "data_saida": ISODate("2023-10-17T16:00:00Z"),
+    "data_entrada": ISODate("2023-10-21T18:00:00Z"),
+    "cliente_id": 7,
+    "video_id": 7
+  },
+  {
+    "_id": 8,
+    "data_saida": ISODate("2023-10-18T17:00:00Z"),
+    "data_entrada": ISODate("2023-10-22T19:00:00Z"),
+    "cliente_id": 8,
+    "video_id": 8
+  },
+  {
+    "_id": 9,
+    "data_saida": ISODate("2023-10-19T18:00:00Z"),
+    "data_entrada": ISODate("2023-10-23T20:00:00Z"),
+    "cliente_id": 9,
+    "video_id": 9
+  },
+  {
+    "_id": 10,
+    "data_saida": ISODate("2023-10-20T19:00:00Z"),
+    "data_entrada": ISODate("2023-10-24T21:00:00Z"),
+    "cliente_id": 10,
+    "video_id": 10
+  },
+  {
+    "_id": 11,
+    "data_saida": ISODate("2023-10-21T10:00:00Z"),
+    "data_entrada": ISODate("2023-10-25T12:00:00Z"),
+    "cliente_id": 1,
+    "video_id": 2
+  },
+  {
+    "_id": 12,
+    "data_saida": ISODate("2023-10-22T11:00:00Z"),
+    "data_entrada": ISODate("2023-10-26T13:00:00Z"),
+    "cliente_id": 2,
+    "video_id": 4
+  },
+  {
+    "_id": 13,
+    "data_saida": ISODate("2023-10-23T12:00:00Z"),
+    "data_entrada": ISODate("2023-10-27T14:00:00Z"),
+    "cliente_id": 3,
+    "video_id": 6
+  },
+  {
+    "_id": 14,
+    "data_saida": ISODate("2023-10-24T13:00:00Z"),
+    "data_entrada": ISODate("2023-10-28T15:00:00Z"),
+    "cliente_id": 4,
+    "video_id": 8
+  },
+  {
+    "_id": 15,
+    "data_saida": ISODate("2023-10-25T14:00:00Z"),
+    "data_entrada": ISODate("2023-10-29T16:00:00Z"),
+    "cliente_id": 5,
+    "video_id": 10
+  },
+  {
+    "_id": 16,
+    "data_saida": ISODate("2023-10-26T15:00:00Z"),
+    "data_entrada": ISODate("2023-10-30T17:00:00Z"),
+    "cliente_id": 6,
+    "video_id": 3
+  },
+  {
+    "_id": 17,
+    "data_saida": ISODate("2023-10-27T16:00:00Z"),
+    "data_entrada": ISODate("2023-10-31T18:00:00Z"),
+    "cliente_id": 7,
+    "video_id": 5
+  },
+  {
+    "_id": 18,
+    "data_saida": ISODate("2023-10-28T17:00:00Z"),
+    "data_entrada": ISODate("2023-11-01T19:00:00Z"),
+    "cliente_id": 8,
+    "video_id": 7
+  },
+  {
+    "_id": 19,
+    "data_saida": ISODate("2023-10-29T18:00:00Z"),
+    "data_entrada": ISODate("2023-11-02T20:00:00Z"),
+    "cliente_id": 9,
+    "video_id": 9
+  },
+  {
+    "_id": 20,
+    "data_saida": ISODate("2023-10-30T19:00:00Z"),
+    "data_entrada": ISODate("2023-11-03T21:00:00Z"),
+    "cliente_id": 10,
+    "video_id": 1
+  }])
+
+
+// EXERCICIO 2
+
+db.aluguer.aggregate([{ $lookup: { from: "cliente", localField: "cliente_id", foreignField: "_id", as: "Dados Clientes" } }])
+
+// EXERCICIO 3
+
+var obtem_clientes = new Array()
+db.cliente.find({},{"_id": 1}).forEach(function(myDoc){obtem_clientes.push(myDoc._id)})
+
+db.aluguer.find({"cliente_id": {$in: obtem_clientes}})

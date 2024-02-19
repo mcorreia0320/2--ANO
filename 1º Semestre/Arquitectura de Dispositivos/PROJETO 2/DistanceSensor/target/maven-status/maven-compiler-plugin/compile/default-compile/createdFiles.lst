@@ -1,0 +1,10 @@
+pt/tpsi/ad/pi4j/Other/MinimalExample.class
+pt/tpsi/ad/pi4j/Interfaces/SimpleEventHandler.class
+pt/tpsi/ad/pi4j/Other/Main.class
+pt/tpsi/ad/pi4j/Components/UltrasonicDistanceSensorComponent$Poller.class
+pt/tpsi/ad/pi4j/Applications/UltrasonicDistanceSensorApp.class
+pt/tpsi/ad/pi4j/Helpers/CrowPiPlatform.class
+module-info.class
+pt/tpsi/ad/pi4j/Interfaces/Application.class
+pt/tpsi/ad/pi4j/Exceptions/MeasurementException.class
+pt/tpsi/ad/pi4j/Components/UltrasonicDistanceSensorComponent.class

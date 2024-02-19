@@ -1,0 +1,13 @@
+<h1 class="text-center text-success">Administração</h1>
+<div class="mt-5 d-flex flex-column px-5 py-3 bg-light shadow-lg rounded-4 gap-3">
+    <h3 class="text-success">Utilizadores Registados:</h3>
+    <div class="d-flex flex-column gap-3">
+        <div ng-repeat="utilizador in utilizadores" class="d-flex justify-content-between align-items-center bg-color py-3 px-5 rounded-4 border border-success">
+            <div class="d-flex gap-3 align-items-center">
+                <p class="fw-bold text-success pe-2 fs-4 m-0 ">Nome: <span class="fw-light">{{utilizador.username}}</span></p>
+                <p class="fw-bold text-success pe-2 fs-4 m-0 ">Email: <span class="fw-light">{{utilizador.email}}</span></p>
+            </div>
+            <button ng-click="deleteUser(utilizador._id)" class="btn btn-danger btn-lg">Eliminar</button>
+        </div>
+    </div>
+</div>

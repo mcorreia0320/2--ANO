@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+<script src="minha_app_controlador.js"></script>
+
+</head>
+
+<body ng-app="exercicio2_app" ng-controller="exercicio2_controlador">
+
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Notas</th> 
+  </tr>
+  
+  <tr ng-repeat="aluno in dados">
+    <td>{{ aluno.nome }}</td>
+	<td>{{ aluno.nota }}</td>
+  </tr>
+  
+  
+</table>
+
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,54 @@
+// EXERCICIO 1
+
+db.video_movieDetails.find({"year": 2014}, {"title": 1, "_id": 0})
+
+// EXERCICIO 2
+
+db.video_movieDetails.find({"countries": ["Portugal"]}, {"title": 1, "countries": 1, "_id": 0})
+
+// EXERCICIO 3
+
+db.video_movieDetails.find({"imdb.rating": {$gt: 9}}, {"_id": 0, "title": 1})
+
+// EXERICIO 4
+
+db.video_movieDetails.find({"actors": "Javier Bardem", "awards.wins": {$gt: 100}})
+
+// EXERCICIO 5
+
+db.video_movieDetails.find({"actors": "Brad Pitt"}, {"_id": 0, "title": 1, "year": 1})
+
+
+// EXERCICIO 6
+
+db.video_movieDetails.find({"actors": {$in: ["Brad Pitt", "Angelina Jolie"]}}, {"_id":0, "title": 1, "actors": 1})
+
+// EXERCICIO 7
+
+db.video_movieDetails.updateOne({"year": 2014}, {$set: {"year": 2300}})
+
+// EXERCICIO 8
+
+db.video_movieDetails.update({}, {$rename: { "title": "titulo" } }, { multi: true })
+
+// EXERCICIO 9
+
+db.video_movieDetails.insert({"year":2010,"rated":"PG-13","released":"2010-08-15T12:30:00.000Z","runtime":135,"countries":["Canada","UK"],"genres":["Action","Adventure","Sci-Fi"],"titulo":"The Quantum Paradox"}
+)
+
+db.video_movieDetails.insertOne({"year":2015,"rated":"R","released":"2015-06-10T18:45:00.000Z","runtime":108,"countries":["France","Spain"],"genres":["Drama","Romance"],"titulo":"Love and Desperation"}
+)
+
+// EXERCICIO 10
+
+db.video_movieDetails.deleteMany({"genres": "Action"})
+
+// EXERCICIO 11
+
+db.video_movieDetails.deleteMany({"imdb.rating": 7 })
+
+// EXERCICIO 12 
+
+db.video_movieDetails.updateOne({"titulo":"Love and Desperation"}, {$set: {"year": 2010}})
+
+db.video_movieDetails.replaceOne({"titulo":"Love and Desperation"}, {"year":2020,"rated":"R","released":"2015-06-10T18:45:00.000Z","runtime":108,"countries":["France","Spain"],"genres":["Drama","Romance"],"titulo":"Love and Desperation"})

@@ -1,0 +1,32 @@
+*** Sexta-Feira, 03 de Novembro de 2023 ***
+
+- Inicialização de Projeto em Laravel
+- Configurar o Projeto para usar bootstrap, sass e um reste
+- Criação de um Layout
+
+*** Terça-Feira, 21 de Novembro de 2023 ***
+- Implementação das views, routes e sass
+- Desenvolvimento das views
+
+*** Quarta-Feira, 29 de Novembro de 2023 ***
+- Criação da base de dados
+- Implementação do Laravel Breeze
+- Perceber bem o funcionamento do Laravel Breeze
+- Adaptação das minhas views para conseguir fazer o registo, login e updates no profile
+
+*** Sexta-Feira, 1 de Dezembro de 2023 ***
+- Criação de um modelo CROWS FOOT sobre como iria ser a minha base de dados
+- Listar quais são os endpoints que sabia que iam ser necesarios
+- Implementação de todas as tabelas e relações (migratations e models)
+- Implementação dos controllers dos modelos em que são necessários
+- Implementação de alguns métodos e endpoints
+- Adicionar ao user um campo boleano "isAdmin" para definir que é o administrador
+- Configurar as views para restringir o acceso a algumas vistas ou componentes que só podem ser usadas pelo administrador
+- Configurar as views para restringir o acceso a algumas vistas ou componentes que só podem ser usadas por utilizador autenticados na aplicação web
+- Configurar o projeto para que um utilizador navegar numa rota que não existe redirigir-la para a View de Erro
+
+*** Sábado, 2 de Dezembro de 2023 ***
+- Implementação de todos os métodos e endpoints restantes para o funcionamento da aplicação
+- Implementação de validações aos campos nos post de formularios
+- Correção de alguns erros
+- Melhorar alguns métodos e views

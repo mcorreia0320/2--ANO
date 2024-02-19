@@ -1,0 +1,45 @@
+Colecção utilizadores:
+- _id: ObjectId
+- username: String
+- email: String
+- password: String
+- favoritos: Array de ObjectIds  --> Com o objetivo de que os utilizadores guardem os ids das suas receitas favoritas.
+- isAdmin: Boolean
+
+
+
+Colecção comentarios:
+- _id: ObjectId
+- pontuacao: Int32
+- descricao: String
+- utilizador_id: ObjectId --> Com o objetivo de referenciar o criador do comentario
+- receita_id: ObjectId --> Com o objetivo de referenciar a que receita pertence o comentario
+
+
+
+Colecção ingredientes:
+- _id: ObjectId
+- nome: String
+- receita_id: Array de ObjectIds --> Com o objetivo de referenciar a que receita pertence o ingrediente
+
+
+Colecção categorias:
+- _id: ObjectId
+- nome: String
+
+Colecção receitas:
+- _id: ObjectId
+- titulo: String
+- descricao: String
+- tempoPreparacao: Int32
+- dificuldade: String
+- imagem: String
+- pasos: Array de Subdocumentos --> Com o objetivo de guardar os pasos do procedimiento da receita
+- categoria_id: ObiectId --> Com o objetivo de referenciar o a categoria da receita
+- utilizador_id: ObjectId --> Com o objetivo de referenciar o criador da receita
+- ingrediente_id: Array de Objectids --> Com o objetivo de guardar os ids dos ingredientes que são usados na receita
+
+Documento pasos:
+- _id: ObjectId
+- descricao: String
+

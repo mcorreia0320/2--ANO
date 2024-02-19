@@ -1,0 +1,194 @@
+ CRUD:
+
+
+*** Create(Inserts) ***
+
+// colecção utilizadores
+
+-- db.utilizadores.insertOne({"username": "mcorreia0320", "email": "miguel@gmail.com", "password": "miguel123", "favoritos": [5], "isAdmin": true})
+
+-- db.utilizadores.insertMany([{ "username": "jacky2004", "email": "jacky@gmail.com", "password": "jacky123", "favoritos": [ 6, ObjectId("659cb25d3399572dd56d6778") ] }, { "username": "saul2002", "email": "saul@gmail.com", "password": "saul123", "favoritos": [] }, { "username": "roberto1997", "email": "roberto@gmail.com", "password": "roberto123", "favoritos": [4,5,6] }, { "username": "hemily1999", "email": "hemily@gmail.com", "password": "hemily123", "favoritos": [] }, { "username": "user123", "email": "user123@example.com", "password": "pass123", "favoritos": [] },{ "username": "john_doe", "email": "john@example.com", "password": "securepwd", "favoritos": [] },
+{ "username": "cookMaster", "email": "cookmaster@email.com", "password": "topchef123", "favoritos": [] }, { "username": "recipeLover", "email": "lover@example.com", "password": "cookingisfun", "favoritos": [] },{ "username": "foodie123", "email": "foodie@example.com", "password": "yumyum123", "favoritos": [] }])
+
+
+-- db.utilizadores.insert([{"username": "magno1991", "email": "magno@gmail.com", "password": "magno123", "favoritos": [2]}, {"username": "jorge1987", "email": "jorge@gmail.com", "password": "jorge123", "favoritos": [5,2,1,4]}])
+
+-- db.utilizadores.insert({"username": "david1988", "email": "david@gmail.com", "password": "david123", "favoritos": []})
+
+-- db.utilizadores.insertOne({"username": "gabriel2004", "email": "gabriel@gmail.com", "password": "gabriel123", "favoritos": []})
+
+// colecção categorias
+
+-- db.categorias.insertMany([{"nome": "Pequeno-Almoco"}, {"nome": "Almoco"}, {"nome": "Jantar"}, {"nome": "Lanches"}, {"nome": "Sobremesas"}, {"nome": "Sobremesas"}, {"nome": "Batidos com Alcool"}, {"nome": "Batidos sem Alcool"}])
+
+
+
+// colecção receitas
+
+-- db.receitas.insertMany([
+  {
+    "titulo": "Panquecas de Mirtilo",
+    "descricao": "Deliciosas panquecas de mirtilo para um pequeno-almoço saudável.",
+    "tempoPreparacao": 20,
+    "dificuldade": "Fácil",
+    "imagem": "panquecas.jpg",
+    "pasos": [
+      { "descricao": "Misture a farinha, o fermento, o leite e os mirtilos." },
+      { "descricao": "Cozinhe em uma frigideira untada." },
+      { "descricao": "Sirva com mel ou xarope de bordo." }
+    ],
+    "categoria_id": ObjectId("659c9e023399572dd56d6761"),
+    "utilizador_id": ObjectId("659caa183399572dd56d676f"),
+    "ingrediente_id": [
+			ObjectId("659cb40c3399572dd56d6779"), 								ObjectId("659cb40c3399572dd56d677a"), 
+			ObjectId("659cb40c3399572dd56d677b"), 
+			ObjectId("659cb40c3399572dd56d677c"), 
+			ObjectId("659cb40c3399572dd56d677d"), 
+			ObjectId("659cb40c3399572dd56d677e")
+			]
+  },
+  {
+    "_id": 1,
+    "titulo": "Sanduíche de Frango",
+    "descricao": "Sanduíche de frango grelhado com vegetais frescos.",
+    "tempoPreparacao": 15,
+    "dificuldade": "Fácil",
+    "imagem": "sanduiche_frango.jpg",
+    "pasos": [
+      { "descricao": "Grelhe o frango e prepare os vegetais frescos." },
+      { "descricao": "Monte o sanduíche com os ingredientes." },
+      { "descricao": "Sirva com salada." }
+    ],
+    "categoria_id": ObjectId("659c9e023399572dd56d6764"),
+    "utilizador_id": ObjectId("659ca91a3399572dd56d676c"),
+    "ingrediente_id": [1, 2, ,3]
+  },
+  { 
+"_id": 2, "titulo": "Ensalada de Verano", "descricao": "Ensalada fresca con tomates, 	pepinos y aderezo de limón.", "tempoPreparacao": 10, "dificuldade": "Fácil", "imagem": "ensalada_verano.jpg", "pasos": [ { "descricao": "Corte los tomates y pepinos en rodajas finas." }, { "descricao": "Mezcle los vegetales en un tazón grande." }, { "descricao": "Agregue el aderezo de limón y mezcle bien." }, { "descricao": "Refrigere durante 30 minutos antes de servir." }], "categoria_id": ObjectId("659c9e023399572dd56d6761"), "utilizador_id": ObjectId("659cab9e3399572dd56d6775"), "ingrediente_id": [4, 5, 6] 
+   },
+   {
+  "_id": 3,
+  "titulo": "Frittata de Vegetales",
+  "descricao": "Frittata italiana con espárragos, tomates y queso parmesano.",
+  "tempoPreparacao": 25,
+  "dificuldade": "Media",
+  "imagem": "frittata_vegetales.jpg",
+  "pasos": [
+    { "descricao": "Saltee los espárragos y los tomates en una sartén." },
+    { "descricao": "Vierta los huevos batidos sobre las verduras." },
+    { "descricao": "Espolvoree el queso parmesano y cocine en el horno." },
+    { "descricao": "Sirva caliente." }
+  ],
+  "categoria_id": ObjectId("659c9e023399572dd56d6762"),
+  "utilizador_id": ObjectId("659caa183399572dd56d6770"),
+  "ingrediente_id": [4, 7, 8]
+   },
+  {
+   "_id": 4,
+  "titulo": "Bolo Opera",
+  "descricao": "Um bolo francês delicado em camadas com café e chocolate.",
+  "tempoPreparacao": 120,
+  "dificuldade": "Difícil",
+  "imagem": "bolo_opera.jpg",
+  "pasos": [
+    { "descricao": "Prepare os discos de bolo de amêndoa e café." },
+    { "descricao": "Faça um ganache de chocolate." },
+    { "descricao": "Monte as camadas de bolo alternando com o ganache." },
+    { "descricao": "Decore o topo com café e cacau em pó." }
+  ],
+  "categoria_id": ObjectId("659c9e023399572dd56d6766"),
+  "utilizador_id": ObjectId("659ca91a3399572dd56d676b"),
+  "ingrediente_id": [ObjectId("659cb40c3399572dd56d6779"), ObjectId("659cb40c3399572dd56d677a"), ObjectId("659cb40c3399572dd56d677b"), 9, 10, 11, 12, 13]
+  },
+  {
+   "_id": 5,
+  "titulo": "Batido de Frutas Tropicais",
+  "descricao": "Um batido refrescante com frutas tropicais misturadas.",
+  "tempoPreparacao": 15,
+  "dificuldade": "Média",
+  "imagem": "batido_frutas_tropicais.jpg",
+  "pasos": [
+    { "descricao": "Corte as frutas tropicais em pedaços pequenos." },
+    { "descricao": "Adicione as frutas cortadas ao liquidificador." },
+    { "descricao": "Adicione o suco de laranja e o iogurte natural." },
+    { "descricao": "Bata tudo até obter uma mistura homogênea." },
+    { "descricao": "Sirva em copos decorados com fatias de frutas." }
+  ],
+  "categoria_id": ObjectId("659c9e023399572dd56d6768"),
+  "utilizador_id": ObjectId("659caa6d3399572dd56d6771"),
+  "ingrediente_id": [14, 15, 16]
+  },
+  {
+   "_id": 6,
+  "titulo": "Pina Colada",
+  "descricao": "Um clássico coquetel tropical feito com rum, leite de coco e suco de abacaxi.",
+  "tempoPreparacao": 10,
+  "dificuldade": "Difícil",
+  "imagem": "pina_colada.jpg",
+  "pasos": [
+    { "descricao": "Em um liquidificador, misture o rum, o leite de coco e o suco de abacaxi." },
+    { "descricao": "Adicione gelo e bata até ficar cremoso." },
+    { "descricao": "Sirva em um copo alto com uma fatia de abacaxi e um guarda-chuva decorativo." }
+  ],
+  "categoria_id": ObjectId("659c9e023399572dd56d6767"),
+  "utilizador_id": ObjectId("659ca6f13399572dd56d676a"),
+  "ingrediente_id": [17, 18, 19, 20, 21]
+  }
+])
+
+
+// colecção ingredientes
+
+-- db.ingredientes.insertMany([
+	{"nome": "Farinha", "receita_id": [ObjectId("659cb25d3399572dd56d6778"), 4]},
+	{"nome": "Fermento", "receita_id": [ObjectId("659cb25d3399572dd56d6778"), 4]},
+	{"nome": "Leite", "receita_id": [ObjectId("659cb25d3399572dd56d6778"), 4]},
+	{"nome": "Mirtilos", "receita_id": [ObjectId("659cb25d3399572dd56d6778")]},
+	{"nome": "Mel", "receita_id": [ObjectId("659cb25d3399572dd56d6778")]},
+	{"nome": "Xarope", "receita_id": [ObjectId("659cb25d3399572dd56d6778")]},
+])
+
+-- db.ingredientes.insertMany([
+	{"_id": 1,"nome": "Frango", "receita_id": [1]},
+	{"_id": 2,"nome": "Vegetais", "receita_id": [1, 3]},
+	{"_id": 3,"nome": "Pao", "receita_id": [1]}
+])
+
+-- db.ingredientes.insertMany([
+	{"_id": 4,"nome": "Tomate", "receita_id": [2, 3]},
+	{"_id": 5,"nome": "Pickles", "receita_id": [2]},
+	{"_id": 6,"nome": "Adereço de Limão", "receita_id": [2]}
+])
+
+-- db.ingredientes.insertMany([
+	{"_id": 7,"nome": "Esparragos", "receita_id": [3]},
+	{"_id": 8,"nome": "Queijo Parmesano", "receita_id": [3]},
+	{"_id": 9,"nome": "Ovos", "receita_id": [3, 4]},
+])
+
+-- db.ingredientes.insertMany([
+	{"_id": 10,"nome": "Cafe", "receita_id": [4]},
+	{"_id": 11,"nome": "Chocolate Parmesano", "receita_id": [4]},
+	{"_id": 13,"nome": "Amendoa", "receita_id": [4]},
+])
+
+-- db.ingredientes.insertMany([
+	{"_id": 14,"nome": "Frutas Tropicais", "receita_id": [5]},
+	{"_id": 15,"nome": "Sumo de Laranja", "receita_id": [5]},
+	{"_id": 16,"nome": "Iogurte Natural", "receita_id": [5]},
+])
+
+-- db.ingredientes.insertMany([
+	{"_id": 17,"nome": "Rum", "receita_id": [6]},
+	{"_id": 18,"nome": "Sumo de Ananas", "receita_id": [6]},
+	{"_id": 19,"nome": "Leite de Coco", "receita_id": [6]},
+	{"_id": 20,"nome": "Gelo", "receita_id": [6]},
+	{"_id": 21,"nome": "Ananas", "receita_id": [6]},
+])
+
+
+// colecção comentarios
+
+-- db.comentarios.insertMany([
+	{"_id": 1, "pontuacao": 4, "descricao": "Excelente Receitaa!!", "utilizador_id": ObjectId("659caa183399572dd56d676f"), "receita_id": 1 },{"_id": 2, "pontuacao": 5, "descricao": "o melhor que ja provei", "utilizador_id": ObjectId("659cab9e3399572dd56d6776"), "receita_id": 3 }, {"_id": 4, "pontuacao": 3, "descricao": "Fico satisfeito", "utilizador_id": ObjectId("659cab3f3399572dd56d6774"), "receita_id": ObjectId("659cb25d3399572dd56d6778") }, {"_id": 5, "pontuacao": 5, "descricao": "Excelente Receitaa, dificil mas valeu a pena", "utilizador_id": ObjectId("659ca91a3399572dd56d676b"), "receita_id": 6 }, {"_id": 6, "pontuacao": 5, "descricao": "Facil e rapido, adorei!", "utilizador_id": ObjectId("659ca91a3399572dd56d676b"), "receita_id": 2 }, {"_id": 7, "pontuacao": 4, "descricao": "Muito bom!", "utilizador_id": ObjectId("659caa183399572dd56d6770"), "receita_id": 2 }, {"_id": 8, "pontuacao": 2, "descricao": "Não gostei muito", "utilizador_id": ObjectId("659cab3f3399572dd56d6773"), "receita_id": 5 }, {"_id": 9, "pontuacao": 5, "descricao": "O melhor bolo com chocolate", "utilizador_id": ObjectId("659ca91a3399572dd56d676d"), "receita_id": 4 }, {"_id": 10, "pontuacao": 4, "descricao": "Dificil, mas é excelente", "utilizador_id": ObjectId("659ca91a3399572dd56d676b"), "receita_id": 4 }, {"_id": 11, "pontuacao": 5, "descricao": "Adorei muito!", "utilizador_id": ObjectId("659ca91a3399572dd56d676b"), "receita_id": 2} 
+])

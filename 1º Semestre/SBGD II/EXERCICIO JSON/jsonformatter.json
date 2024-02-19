@@ -1,0 +1,33 @@
+{
+  "Stores": [
+    {
+      "storeId": "1",
+      "name": "Roupas Fixes",
+      "releaseDate": "10-01-2021",
+      "openingAt": "09:00:00",
+      "closingAt": "19:00:00",
+      "employees": [
+        {
+          "employeId": 1,
+          "firstname": "Joao",
+          "lastname": "Sousa",
+          "age": 20,
+          "phone": "987654321"
+        },
+        {
+          "employeId": 2,
+          "firstname": "Andreia",
+          "lastname": "Pinto",
+          "age": 23
+        },
+        {
+          "employeId": 3,
+          "firstname": "Patricia",
+          "lastname": "Silva",
+          "age": 22,
+          "phone": "123456789"
+        }
+      ]
+    }
+  ]
+}

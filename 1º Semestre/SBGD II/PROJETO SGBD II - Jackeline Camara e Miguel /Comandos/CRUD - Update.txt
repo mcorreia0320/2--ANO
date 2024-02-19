@@ -1,0 +1,38 @@
+UPDATES 
+
+1. Adicionar um ingrediente a uma receita. 
+
+db.receitas.updateOne({"titulo": "Batido de Frutas Tropicais"}, {$push: {"ingrediente_id": 5}})
+
+var ingrediente = db.ingredientes.findOne({"nome": "Frango"});
+
+db.receitas.updateOne(
+   { "titulo": "Batido de Frutas Tropicais" },
+   { $push: { "ingrediente_id": ingrediente._id } }
+);
+
+
+2. Adicionar uma receita a uma lista de favoritos
+
+var receita = db.receitas.findOne({"titulo": "Panquecas de Mirtilo"})
+var adicionar_receita_fav = db.utilizadores.updateOne({"username": "hemily1999"}, {$push: {"favoritos": receita._id}})
+
+3. Atualizar um comentario 
+
+db.comentarios.updateOne({"_id": 4}, {$set: {"descricao": "Muito dificil!!"}})
+
+4. Atualizar a palavra passe de um utilizador
+
+db.utilizadores.updateOne({"username": "gabriel2004"}, {$set: {"password": "Gabo2359"}})
+
+5. Atualizar um passo dentro do array pasos atraves do indice
+
+db.receitas.updateOne({"titulo": "Pina Colada"}, {$set: {"pasos.1.descricao": "Adicione gelo a bebida e bata ate ficar cremoso"}})
+
+6. Alterar o nome de uma categoria
+
+db.categorias.updateMany({"nome": "Batidos com Alcool"}, {$set: {"nome": "Bebidas com Alcool"}})
+
+7. Apagar um ingrediente de uma receita
+
+db.receitas.updateOne({"_id": 6}, {$pull: {"ingrediente_id": 18}})
